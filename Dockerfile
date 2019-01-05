@@ -22,11 +22,11 @@ RUN qmake ../multimon-ng.pro PREFIX=/usr/local
 RUN make
 RUN make install
 
+RUN git clone https://github.com/ryaneastland/pagermon.git /pagermon
+
 FROM node:9.4.0-alpine
 
 ENV NODE_ENV production
-
-RUN git clone https://github.com/ryaneastland/pagermon.git /pagermon
 
 WORKDIR /pagermon/client
 
