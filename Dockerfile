@@ -13,7 +13,7 @@ RUN apt-get update \
 
 RUN ldconfig
 
-RUN git clone --depth 1 --progress git://github.com/EliasOenal/multimon-ng.git /tmp/multimon-ng
+RUN git clone --depth 1 --progress git://github.com/ryaneastland/multimon-ng.git /tmp/multimon-ng
 
 RUN mkdir /tmp/multimon-ng/build
 
@@ -22,16 +22,12 @@ RUN qmake ../multimon-ng.pro PREFIX=/usr/local
 RUN make
 RUN make install
 
-RUN mkdir /var/www/pager/
-RUN chmod 777 /var/www/pager/
+FROM node:9.4.0-alpine
 
-EXPOSE 8080
+ENV NODE_ENV production
 
-VOLUME ["/var/www/pager"]
+RUN git clone https://github.com/ryaneastland/pagermon.git /pagermon
 
-WORKDIR /var/www
-RUN git clone --depth 1 --progress https://github.com/derekeder/csv-to-html-table /var/www/csv-to-html-table
-COPY index.html /var/www
+WORKDIR /pagermon/client
 
-COPY ./run.sh /
-ENTRYPOINT ["/run.sh"]
+RUN nmp install
