@@ -1,8 +1,9 @@
 # derive from our baseimage
 FROM envoi/rtlsdr-base:latest
-
+RUN apt-get update -y
+RUN apt-get install -y curl
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
-RUN apt-get install -y nodejs
+RUN apt-get install -y nodejs npm
 
 MAINTAINER Anton S. <anton@env.sh>
 LABEL Description="RTLSDR Multimon-ng in Docker"
