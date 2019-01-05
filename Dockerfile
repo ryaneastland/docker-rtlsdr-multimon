@@ -30,4 +30,4 @@ ENV NODE_ENV production
 
 WORKDIR /pagermon/client
 
-RUN nmp install
+RUN npm install
