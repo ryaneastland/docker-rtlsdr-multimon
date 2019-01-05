@@ -31,3 +31,5 @@ RUN git clone https://github.com/ryaneastland/pagermon.git /pagermon
 WORKDIR /pagermon/client
 
 RUN npm install
+
+ENTRYPOINT ["/pagermon/client/reader.sh"]
