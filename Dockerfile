@@ -1,6 +1,9 @@
 # derive from our baseimage
 FROM envoi/rtlsdr-base:latest
 
+RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
+RUN apt-get install -y nodejs
+
 MAINTAINER Anton S. <anton@env.sh>
 LABEL Description="RTLSDR Multimon-ng in Docker"
 LABEL Vendor="Envoi"
@@ -23,10 +26,6 @@ RUN make
 RUN make install
 
 RUN git clone https://github.com/ryaneastland/pagermon.git /pagermon
-
-FROM node:9.4.0-alpine
-
-ENV NODE_ENV production
 
 WORKDIR /pagermon/client
 
